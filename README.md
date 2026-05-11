@@ -48,3 +48,7 @@ Optimization - portfolio and cash flow ratio.
 1.b	尋找支撐（低點）	買入股票	建立長期頭寸並受 Put 保護
 1.c	看平/微跌（反彈乏力）	賣出下月 Call	賺取收入並形成涵蓋認購（Covered Call）
 
+
+**雙向市 期權操作**
+---
+<img width="643" height="900" alt="影像圖層 拷貝" src="https://github.com/user-attachments/assets/eca313a3-8982-4608-8648-ade866467b3b" />

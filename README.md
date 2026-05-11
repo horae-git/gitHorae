@@ -18,7 +18,7 @@ Search - risk alerts and maximize opportunities.
 \
 Optimization - portfolio and cash flow ratio.
 
-**領峰策略（Collar-peak Strategy）**
+**📈領峰策略（Collar-peak Strategy）**
 ---
 
 這套流程結合了波段操作與期權對沖（Hedging），形成了一個從看跌轉為看漲，最後鎖定利潤的動態交易策略。這與常見的 領口策略（Collar Strategy） 有些相似，但加入了一定的時間差與趨勢判斷。

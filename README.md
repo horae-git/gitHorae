@@ -54,3 +54,5 @@ Optimization - portfolio and cash flow ratio.
 **雙向市 期權操作參考**
 ---
 <img width="643" height="900" alt="影像圖層 拷貝" src="https://github.com/user-attachments/assets/eca313a3-8982-4608-8648-ade866467b3b" />
+
+> ⚠️ **免責聲明**：以上內容整理自公開資訊，不構成任何投資建議。投資涉及風險，請獨立判斷。

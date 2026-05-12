@@ -6,9 +6,9 @@
 \
 Provide - five-star stocks (high quality and defensive) that can be equipped with optimize the collar-peak strategy.
 
-**建議-行動以賺取每月10%的利息，並保持五星級股票的穩定增長。**
+**建議-行動以賺取每月2%的利息，並保持五星級股票的穩定增長。**
 \
-Suggestion - Take action to earn 10% interest per month and maintain the stable growth of five-star stocks.
+Suggestion - Take action to earn 2% interest per month and maintain the stable growth of five-star stocks.
 
 **搜尋-風險警報和最大化的機會。**
 \

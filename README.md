@@ -14,7 +14,7 @@ Suggestion - Take action to earn 2% interest per month and maintain the stable g
 \
 Search - risk alerts and maximize opportunities.
 
-**最佳化-投資組合和現金流比率。**
+**[最佳化-投資組合和現金流比率](小吉選股-Q1五星級股票比拼.md)。**
 \
 Optimization - portfolio and cash flow ratio.
 

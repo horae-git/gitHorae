@@ -18,6 +18,10 @@ Search - risk alerts and maximize opportunities.
 \
 Optimization - portfolio and cash flow ratio.
 
+**[觀察日誌每天提示-](領峰座觀察日誌.md)**
+**領峰座流星雨策略**
+
+\
 **📈領峰策略（Collar-peak Strategy）**
 ---
 

@@ -6,24 +6,29 @@
 \
 Provide - five-star stocks (high quality and defensive) that can be equipped with optimize the collar-peak strategy.
 
-**建議-行動以賺取每月10%的利息，並保持五星級股票的穩定增長。**
+**建議-行動以賺取每月2%的利息，並保持五星級股票的穩定增長。**
 \
-Suggestion - Take action to earn 10% interest per month and maintain the stable growth of five-star stocks.
+Suggestion - Take action to earn 2% interest per month and maintain the stable growth of five-star stocks.
 
 **搜尋-風險警報和最大化的機會。**
 \
 Search - risk alerts and maximize opportunities.
 
-**最佳化-投資組合和現金流比率。**
+**[最佳化-投資組合和現金流比率](小吉配置-Q1評分.md)。**
 \
 Optimization - portfolio and cash flow ratio.
 
+**[觀察日誌每天提示-](領峰座觀察日誌.md)**
+**領峰座流星雨策略**
+
+\
 **📈領峰策略（Collar-peak Strategy）**
 ---
 
 這套流程結合了波段操作與期權對沖（Hedging），形成了一個從看跌轉為看漲，最後鎖定利潤的動態交易策略。這與常見的 領口策略（Collar Strategy） 有些相似，但加入了一定的時間差與趨勢判斷。
 
 以下是針對你提到的三個步驟的詳細拆解與分析：
+\
 步驟 1.a：在高位回落時買入認跌期權（Long Put）
 * 策略用意：在股價達到局部高點（Local Peak）並開始呈現下降趨勢時買入當月認跌期權（Put Option）。
 * 目的：這是一個純粹的看跌投機，旨在利用股價下跌獲利。此時你尚未持有股票。
@@ -41,14 +46,26 @@ Optimization - portfolio and cash flow ratio.
 
 
 總結與風險提示
-這種做法是一種精細的擇時交易，優點在於透過期權在下跌趨勢中創造了廉價甚至「負成本」的入場機會。
+這種做法是一種精細的擇時交易，
+\
+優點在於透過期權在下跌趨勢中創造了廉價甚至「**負成本**」的入場機會。
 
-步驟	市場判斷	行動	主要目的
-1.a	看跌（高點回落）	買入 Put	從下跌中獲利
-1.b	尋找支撐（低點）	買入股票	建立長期頭寸並受 Put 保護
-1.c	看平/微跌（反彈乏力）	賣出下月 Call	賺取收入並形成涵蓋認購（Covered Call）
+|步驟	|市場判斷	|行動	|主要目的|
+|-----|----------------|-------------------|-----------------------|
+|1.a	|看跌（高點回落）	|買入 Put	|從下跌中獲利|
+|1.b	|尋找支撐（低點）	|買入股票	|建立長期頭寸並受Put保護|
+|1.c	|看平/微跌（反彈乏力）	|賣出下月 Call	|賺取收入並形成涵蓋認購（Covered Call)|
 
+**領峰格言： 耐住性子等回踩，支撐位到現貨買；反彈乏力現流星，下月 Call 盤果斷賣。**
+\
+從探索總體經濟的局部高低點判斷，轉化為「股票現貨 + 期權避險」的動態操作指南。
+\
+旨在多空雙向市中鎖定下行風險，並為投資組合創造穩定的現金流。
 
-**雙向市 期權操作**
+**雙向市 期權操作參考**
 ---
 <img width="643" height="900" alt="影像圖層 拷貝" src="https://github.com/user-attachments/assets/eca313a3-8982-4608-8648-ade866467b3b" />
+
+---
+> ⚠️ **免責聲明**：以上內容整理自個人筆記，不構成任何投資建議。投資涉及風險，請獨立判斷。
+---

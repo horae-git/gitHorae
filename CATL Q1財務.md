@@ -1,6 +1,6 @@
 ---
 title: 財報
-status: prepare wiki
+status: prepare wiki 
 tags:
   - 30-R
 ---

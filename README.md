@@ -15,9 +15,9 @@ Suggestion - Take action to earn 2% interest per month and maintain the stable g
 \
 Search - risk alerts and maximize opportunities.
 
-**[最佳化-投資組合和現金流比率](小吉配置-Q1評分.md)。**
+**[四引擎投資組合戰略分析](quad-portfolio.md)。**
 \
-Optimization - portfolio and cash flow ratio.
+**極致增長潛力、抗週期防禦與生物創新爆發力的多資產體系**
 
 **[觀察日誌每天提示-](領峰座觀察日誌.md)**
 **領峰座流星雨策略**

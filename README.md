@@ -15,7 +15,7 @@ Suggestion - Take action to earn 2% interest per month and maintain the stable g
 \
 Search - risk alerts and maximize opportunities.
 
-**[四引擎投資組合戰略分析](quad-portfolio.md)。**
+**[四引擎投資組合戰略分析](.github/workflows/quad-portfolio.md)。**
 \
 **極致增長潛力、抗週期防禦與生物創新爆發力的多資產體系**
 

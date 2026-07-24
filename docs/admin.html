@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="zh-TW"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投資組合管理後台</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h1 { color: #1e3c72; margin-bottom: 10px; }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border: none;
+      background: white;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+    .tab-btn.active {
+      border-bottom-color: #667eea;
+      color: #667eea;
+    }
+    .tab-content {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .tab-content.active { display: block; }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    textarea { resize: vertical; min-height: 200px; font-family: monospace; }
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+    button:hover { transform: scale(1.05); }
+    .stock-list {
+      display: grid;
+      gap: 10px;
+    }
+    .stock-item {
+      background: #f9f9f9;
+      padding: 12px;
+      border-left: 3px solid #667eea;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stock-info {
+      flex: 1;
+    }
+    .stock-name { font-weight: 600; color: #1e3c72; }
+    .stock-code { font-size: 12px; color: #999; margin-top: 2px; }
+    .quick-edit {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .quick-edit input {
+      width: 80px;
+      padding: 5px;
+    }
+    .message {
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      display: none;
+    }
+    .message.success {
+      background: #e8f5e9;
+      color: #1b5e20;
+      display: block;
+    }
+    .message.error {
+      background: #ffebee;
+      color: #c62828;
+      display: block;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .api-example {
+      background: #f5f5f5;
+      padding: 12px;
+      border-radius: 4px;
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+    .api-example code {
+      background: transparent;
+      padding: 0;
+      color: #d63384;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 投資組合管理後台</h1>
+      <p style="color: #666; margin-top: 8px;">實時更新股票和宏觀數據</p>
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">📈 單股編輯</button>
+      <button class="tab-btn" onclick="switchTab(1)">📋 JSON 編輯</button>
+      <button class="tab-btn" onclick="switchTab(2)">📊 批量更新</button>
+      <button class="tab-btn" onclick="switchTab(3)">🔧 API 文檔</button>
+    </div>
+
+    <!-- Tab 1: 單股編輯 -->
+    <div class="tab-content active" id="tab0">
+      <h3>選擇要編輯的股票</h3>
+      <div class="stock-list" id="stockList"></div>
+    </div>
+
+    <!-- Tab 2: JSON 編輯 -->
+    <div class="tab-content" id="tab1">
+      <h3>直接編輯 JSON 數據</h3>
+      <div class="form-group">
+        <label>完整 JSON 數據：</label>
+        <textarea id="jsonEditor"></textarea>
+      </div>
+      <button onclick="saveJsonData()">💾 保存 JSON</button>
+      <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 4px;">
+        ⚠️ 謹慎編輯！確保 JSON 格式正確
+      </div>
+    </div>
+
+    <!-- Tab 3: 批量更新 -->
+    <div class="tab-content" id="tab2">
+      <h3>批量更新多支股票</h3>
+      <div class="form-group">
+        <label>批量更新 JSON 格式（標準格式）：</label>
+        <textarea id="batchEditor" placeholder="{&quot;stocks&quot;: [{&quot;code&quot;: &quot;HK.01801&quot;, &quot;currentPrice&quot;: 92.05, &quot;changePercent&quot;: -0.22}]}"></textarea>
+      </div>
+      <button onclick="saveBatchUpdate()">🚀 執行批量更新</button>
+      <p style="color: #666; margin-top: 10px; font-size: 12px;">提示：只需填寫要修改的字段</p>
+    </div>
+
+    <!-- Tab 4: API 文檔 -->
+    <div class="tab-content" id="tab3">
+      <h3>API 使用文檔</h3>
+
+      <h4>📖 方法 1: 更新單支股票（部分字段）</h4>
+      <div class="api-example">
+        <code>PATCH /api/stock/HK.01801</code>
+      </div>
+      <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto;">{
+  "currentPrice": 92.05,
+  "changePercent": -0.22,
+  "assessment": "P2 平穩持倉"
+}
+      </pre>
+
+      <h4>📖 方法 2: 替換單支股票（完整覆蓋）</h4>
+      <div class="api-example">
+        <code>PUT /api/stock/HK.01801</code>
+      </div>
+
+      <h4>📖 方法 3: 更新宏觀摘要</h4>
+      <div class="api-example">
+        <code>PATCH /api/summary</code>
+      </div>
+      <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto;">{
+  "hsi": 25096.46,
+  "hsiChange": 0.82,
+  "upCount": 3,
+  "downCount": 2
+}
+      </pre>
+
+      <h4>📖 方法 4: 批量更新</h4>
+      <div class="api-example">
+        <code>POST /api/stocks/batch</code>
+      </div>
+
+      <h4>📖 方法 5: 查詢數據</h4>
+      <div class="api-example">
+        <code>GET /api/portfolio</code> — 獲取全部數據
+      </div>
+      <div class="api-example">
+        <code>GET /api/stock/HK.01801</code> — 查詢單支股票
+      </div>
+
+      <h4>📖 方法 6: 重置數據</h4>
+      <div class="api-example">
+        <code>POST /api/reset</code>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 頁面初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPortfolio();
+      loadJsonEditor();
+    });
+
+    // 標籤切換
+    function switchTab(index) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(`tab${index}`).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // 加載投資組合數據
+    async function loadPortfolio() {
+      try {
+        const res = await fetch('/api/portfolio');
+        const data = await res.json();
+        const list = document.getElementById('stockList');
+
+        list.innerHTML = data.stocks.map(stock => `
+          <div class="stock-item">
+            <div class="stock-info">
+              <div class="stock-name">${stock.name}</div>
+              <div class="stock-code">${stock.code}</div>
+            </div>
+            <div class="quick-edit">
+              <input type="number" step="0.01" value="${stock.currentPrice}"
+                     id="price-${stock.code}" placeholder="價格">
+              <input type="number" step="0.01" value="${stock.changePercent}"
+                     id="change-${stock.code}" placeholder="漲跌%">
+              <button onclick="quickUpdateStock('${stock.code}')">更新</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        showMessage('❌ 加載失敗: ' + error.message, 'error');
+      }
+    }
+
+    // 快速更新單支股票
+    async function quickUpdateStock(code) {
+      const price = parseFloat(document.getElementById(`price-${code}`).value);
+      const change = parseFloat(document.getElementById(`change-${code}`).value);
+
+      try {
+        const res = await fetch(`/api/stock/${code}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ currentPrice: price, changePercent: change })
+        });
+        const result = await res.json();
+        showMessage('✅ ' + result.message, 'success');
+      } catch (error) {
+        showMessage('❌ 更新失敗: ' + error.message, 'error');
+      }
+    }
+
+    // 加載 JSON 編輯器
+    async function loadJsonEditor() {
+      try {
+        const res = await fetch('/api/portfolio');
+        const data = await res.json();
+        document.getElementById('jsonEditor').value = JSON.stringify(data, null, 2);
+      } catch (error) {
+        showMessage('❌ 加載 JSON 失敗', 'error');
+      }
+    }
+
+    // 保存 JSON 數據
+    async function saveJsonData() {
+      try {
+        const data = JSON.parse(document.getElementById('jsonEditor').value);
+        const res = await fetch('/api/portfolio', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        showMessage('✅ JSON 已保存', 'success');
+        loadPortfolio();
+      } catch (error) {
+        showMessage('❌ 保存失敗: ' + error.message, 'error');
+      }
+    }
+
+    // 批量更新
+    async function saveBatchUpdate() {
+      try {
+        const data = JSON.parse(document.getElementById('batchEditor').value);
+        const res = await fetch('/api/stocks/batch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        showMessage('✅ ' + result.message + ' (' + result.total + ' 支)', 'success');
+        loadPortfolio();
+      } catch (error) {
+        showMessage('❌ 批量更新失敗: ' + error.message, 'error');
+      }
+    }
+
+    // 顯示消息
+    function showMessage(text, type) {
+      const msg = document.getElementById('message');
+      msg.textContent = text;
+      msg.className = 'message ' + type;
+      setTimeout(() => { msg.className = 'message'; }, 3000);
+    }
+  </script>
+
+
+  </body></html>
